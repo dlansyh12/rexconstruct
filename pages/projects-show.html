@@ -91,64 +91,78 @@
     </aside>
 </section>  
 
-<!-- ABOUT COMPANY SECTION -->
-<section class="relative max-w-4xl mx-auto px-6 md:px-12 py-20 space-y-8">
+<!-- PROJECTS SHOWCASE -->
+<section class="relative w-full bg-gray-50 py-20">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    
     <!-- Heading -->
-    <h2 class="text-lg font-semibold text-gray-700 tracking-wide">
-      About Rex Construct
-    </h2>
-  
-    <!-- Description -->
-    <p class="text-2xl md:text-3xl font-light leading-relaxed text-gray-900">
-      Rex Construct offers end-to-end expertise throughout the development process.
-      From concept design to handing you the keys, our team will assist you through each step.
-      Including: scope of sites, urban design, town planning advisory, subdivision advisory, compliance,
-      preparation of land and build feasibility studies.
-    </p>
-</section>  
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold text-gray-900">Our Projects</h2>
+      <p class="mt-4 text-lg text-gray-600">Our latest works and developments.</p>
+    </div>
 
-<!-- BANNER SECTION -->
-<section class="relative h-[50vh] w-full overflow-hidden">
-    <img src="../assets/images/banner-about2.png" 
-         alt="About Banner"
-         class="absolute top-0 left-0 w-full h-full object-cover" />
+    <!-- Grid Projects -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      
+      <!-- Project 1 -->
+      <div class="bg-white rounded-lg overflow-hidden">
+        <div class="w-full h-72 md:h-96">
+          <img src="../assets/images/dummy1.png" alt="Project 1"
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-left">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Modern Office Complex</h3>
+          <button class="px-6 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition">
+            View More
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="bg-white rounded-lg overflow-hidden">
+        <div class="w-full h-72 md:h-96">
+          <img src="../assets/images/dummy2.png" alt="Project 2"
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-left">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Luxury Residential Tower</h3>
+          <button class="px-6 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition">
+            View More
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="bg-white rounded-lg overflow-hidden">
+        <div class="w-full h-72 md:h-96">
+          <img src="../assets/images/banner-about.png" alt="Project 3"
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-left">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Industrial Warehouse</h3>
+          <button class="px-6 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition">
+            View More
+          </button>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="bg-white rounded-lg overflow-hidden">
+        <div class="w-full h-72 md:h-96">
+          <img src="../assets/images/banner-about2.png" alt="Project 4"
+               class="w-full h-full object-cover">
+        </div>
+        <div class="p-6 text-left">
+          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Community Center</h3>
+          <button class="px-6 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition">
+            View More
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
-  
-<!-- TEXT + IMAGE SECTION -->
-<section class="max-w-6xl mx-auto px-6 md:px-12 py-20 grid md:grid-cols-2 gap-12 items-center">
-    <!-- Text Content -->
-    <div class="space-y-6">
-      <h2 class="text-3xl md:text-4xl font-semibold text-gray-900">
-        Our Commitment
-      </h2>
-      <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-        At Rex Construct, we ensure every project is built with precision, innovation,
-        and a deep respect for design integrity. We collaborate closely with our clients 
-        to deliver sustainable and forward-thinking solutions.
-      </p>
-      <a href="projects-show.html"
-         class="inline-flex items-center gap-2 px-6 py-3 bg-black text-white rounded-md font-medium shadow transition-all duration-300 hover:bg-gray-800 group">
-        <span class="transition-transform duration-300 group-hover:translate-x-1">View More</span>
-        <svg xmlns="http://www.w3.org/2000/svg" 
-             viewBox="0 0 24 24" 
-             fill="none" 
-             stroke="currentColor" 
-             stroke-width="2" 
-             stroke-linecap="round" 
-             stroke-linejoin="round" 
-             class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5">
-          <path d="M7 17L17 7M17 7H8M17 7V16"/>
-        </svg>
-      </a>
-    </div>
-  
-    <!-- Image -->
-    <div class="w-full h-80 md:h-full">
-      <img src="../assets/images/dummy1.png" 
-           alt="Rex Construct Work"
-           class="w-full h-full object-cover rounded-lg shadow-lg" />
-    </div>
-</section>  
 
 <!-- FOOTER -->
 <footer id="site-footer"
@@ -219,7 +233,7 @@
       <!-- Right side: Build Smart + Copyright -->
       <div class="flex flex-col items-start md:items-end space-y-4">
         <!-- Build Smart -->
-        <a href="contact.html"
+        <a href="#contact"
            class="group relative inline-flex items-center gap-2 text-2xl md:text-3xl font-bold text-white transition">
           Build Smart
           <svg viewBox="0 0 24 24" fill="none"
@@ -246,6 +260,8 @@
 
 <!-- js for default functions -->
 <script src="../js/script.js"></script>
+<!-- js for why page -->
+<script src="../js/projects-show.js"></script>
 
 </body>
 </html>

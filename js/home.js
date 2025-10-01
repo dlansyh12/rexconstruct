@@ -20,9 +20,9 @@ if (!N) return;
 carousel.innerHTML = '';
 for (let b = 0; b < 3; b++) {
     originalHTML.forEach(html => {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html.trim();
-    carousel.appendChild(tmp.firstChild);
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html.trim();
+        carousel.appendChild(tmp.firstChild);
     });
 }
 
@@ -60,13 +60,13 @@ function setAnimated(i){
 
 carousel.addEventListener('transitionend', () => {
     if (index >= 2 * N) {
-    index -= N;
-    setInstant(index);
-    void carousel.offsetWidth;
+        index -= N;
+        setInstant(index);
+        void carousel.offsetWidth;
     } else if (index < N) {
-    index += N;
-    setInstant(index);
-    void carousel.offsetWidth;
+        index += N;
+        setInstant(index);
+        void carousel.offsetWidth;
     }
     setTimeout(() => { isAnimating = false; }, 20);
 });
@@ -76,7 +76,7 @@ imagesLoaded(carousel).then(() => {
     index = N;
     setInstant(index);
     setTimeout(()=> {
-    carousel.style.transition = `transform ${duration}ms ${easing}`;
+        carousel.style.transition = `transform ${duration}ms ${easing}`;
     }, 30);
 });
 
@@ -95,14 +95,52 @@ let resizeTimer;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-    computeSizes();
-    setInstant(index);
-    setTimeout(()=> {
-        carousel.style.transition = `transform ${duration}ms ${easing}`;
-    }, 20);
+        computeSizes();
+        setInstant(index);
+        setTimeout(()=> {
+            carousel.style.transition = `transform ${duration}ms ${easing}`;
+        }, 20);
     }, 120);
 });
-})();
+
+// 🔥 Tambahan: swipe/drag support (desktop + mobile)
+let startX = 0;
+let isDown = false;
+
+function pointerDown(e) {
+    isDown = true;
+    startX = e.pageX || e.touches[0].pageX;
+}
+function pointerMove(e) {
+    if (!isDown) return;
+    let x = e.pageX || e.touches[0].pageX;
+    let diff = x - startX;
+    // Geser sementara (drag effect)
+    carousel.style.transition = 'none';
+    carousel.style.transform = `translateX(${-(index * step) - diff}px)`;
+}
+function pointerUp(e) {
+    if (!isDown) return;
+    isDown = false;
+    let x = e.pageX || (e.changedTouches ? e.changedTouches[0].pageX : startX);
+    let diff = x - startX;
+
+    if (Math.abs(diff) > 50) {
+    if (diff < 0) index++; else index--;
+    }
+    setAnimated(index);
+}
+
+wrapper.addEventListener('mousedown', pointerDown);
+wrapper.addEventListener('mousemove', pointerMove);
+wrapper.addEventListener('mouseup', pointerUp);
+wrapper.addEventListener('mouseleave', pointerUp);
+
+wrapper.addEventListener('touchstart', pointerDown, {passive:true});
+wrapper.addEventListener('touchmove', pointerMove, {passive:true});
+wrapper.addEventListener('touchend', pointerUp);
+
+})();    
 
 // Fade-in teks "Why Rex Construct" saat muncul di viewport
 const whyText = document.getElementById('why-text');
