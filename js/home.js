@@ -1,7 +1,8 @@
-// Looping text
 const track = document.getElementById('scrollTrack');
+
 lenis.on('scroll', ({ scroll }) => {
-track.style.transform = `translateX(${-scroll * 0.3 % track.scrollWidth}px)`;
+  // perhitungan scroll + loop
+  track.style.transform = `translateX(${-scroll * 0.3 % track.scrollWidth}px)`;
 });
 
 // Carousel infinite scroll
