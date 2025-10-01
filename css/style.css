@@ -3,3 +3,12 @@ body{font-family:'Montserrat',sans-serif;}
 .scroll-track{will-change:transform;}
 .carousel-track{transition:transform .6s ease;}
 .nav-disabled{opacity:0.4;cursor:not-allowed;}
+
+/* Contact line */
+@keyframes lineGrow {
+from { width: 0; }
+to { width: 100%; }
+}
+.animate-line {
+animation: lineGrow 1.2s ease forwards;
+}
