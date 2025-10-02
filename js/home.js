@@ -134,6 +134,44 @@ wrapper.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
+// mobile
+let touchStartX = 0;
+let touchBuffer = 0;
+let touchCooldown = false;
+
+wrapper.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    touchStartX = e.touches[0].pageX;
+    touchBuffer = 0;
+}, { passive: true });
+
+wrapper.addEventListener('touchmove', (e) => {
+    if (isAnimating || touchCooldown || e.touches.length !== 1) return;
+    let deltaX = e.touches[0].pageX - touchStartX;
+    touchBuffer += deltaX;
+    touchStartX = e.touches[0].pageX;
+}, { passive: true });
+
+wrapper.addEventListener('touchend', (e) => {
+    if (isAnimating || touchCooldown) return;
+
+    if (Math.abs(touchBuffer) > SWIPE_THRESHOLD) {
+        if (touchBuffer < 0) {
+            index++;
+        } else {
+            index--;
+        }
+        setAnimated(index);
+
+        touchCooldown = true;
+        touchBuffer = 0;
+
+        setTimeout(() => {
+            touchCooldown = false;
+        }, duration + 150);
+    }
+});
+
 })();             
 
 // Fade-in teks "Why Rex Construct" saat muncul di viewport
