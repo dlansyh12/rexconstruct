@@ -1,9 +1,37 @@
-const track = document.getElementById('scrollTrack');
+// scroll track
+(function(){
+const gallery = document.getElementById('galleryTrack');
+let isDown = false;
+let startX, scrollLeft;
 
-lenis.on('scroll', ({ scroll }) => {
-  // perhitungan scroll + loop
-  track.style.transform = `translateX(${-scroll * 0.3 % track.scrollWidth}px)`;
+gallery.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - gallery.offsetLeft;
+    scrollLeft = gallery.scrollLeft;
 });
+gallery.addEventListener('mouseleave', () => isDown = false);
+gallery.addEventListener('mouseup', () => isDown = false);
+gallery.addEventListener('mousemove', e => {
+    if(!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - gallery.offsetLeft;
+    const walk = (x - startX) * 2; // scroll-fast
+    gallery.scrollLeft = scrollLeft - walk;
+});
+
+// Touch
+let startTouchX = 0;
+let touchScrollLeft = 0;
+gallery.addEventListener('touchstart', e => {
+    startTouchX = e.touches[0].pageX;
+    touchScrollLeft = gallery.scrollLeft;
+});
+gallery.addEventListener('touchmove', e => {
+    const x = e.touches[0].pageX;
+    const walk = (x - startTouchX) * 2;
+    gallery.scrollLeft = touchScrollLeft - walk;
+});
+})();
 
 // Projects Showcase
 (function(){
@@ -134,43 +162,4 @@ wrapper.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
-})();             
-
-// Fade-in teks "Why Rex Construct" saat muncul di viewport
-const whyText = document.getElementById('why-text');
-if (whyText) {
-const observer = new IntersectionObserver(
-    (entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-        whyText.classList.remove('opacity-0', 'translate-y-8');
-        observer.disconnect();
-        }
-    });
-    },
-    { threshold: 0.4 }
-);
-observer.observe(whyText);
-}
-
-// Scroll line animation
-const scrollLine = document.getElementById("scroll-line");
-if (scrollLine) {
-  lenis.on("scroll", ({ scroll }) => {
-    const section = scrollLine.closest("section");
-    const rect = section.getBoundingClientRect();
-    const winH = window.innerHeight;
-
-    // Hitung progress (0 - 1) berdasarkan posisi viewport
-    let progress = 0;
-    if (rect.top < winH && rect.bottom > 0) {
-      const visible = Math.min(winH, rect.bottom) - Math.max(0, rect.top);
-      const total = rect.height + winH;
-      progress = 1 - (rect.bottom - visible) / total;
-      progress = Math.min(Math.max(progress, 0), 1);
-    }
-
-    // Update lebar garis (dari kiri → kanan / kanan → kiri)
-    scrollLine.style.width = `${progress * 100}%`;
-  });
-}
+})();  

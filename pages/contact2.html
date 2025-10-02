@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="shortcut icon" href="../../assets/images/logo-white.png" type="image/x-icon">
+<link rel="shortcut icon" href="../assets/images/logo-white.png" type="image/x-icon">
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <!-- Custom CSS -->
-<link rel="stylesheet" href="../../css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 <!-- Tailwind and Lenis -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lenis@1.3.11/dist/lenis.min.js"></script>
@@ -22,19 +22,19 @@
 <!-- HERO SECTION (About Page) -->
 <section class="relative h-[40vh] w-full overflow-hidden">
     <!-- Background Image -->
-    <img src="../../assets/images/banner-about.png" 
+    <img src="../assets/images/contact-banner.png" 
          alt="About Rex Construct"
          class="absolute top-0 left-0 w-full h-full object-cover">
   
     <!-- Navbar -->
     <nav class="absolute top-0 left-0 w-full flex items-center justify-between px-6 md:px-12 py-4 z-20">
-      <a href="../../index.html" class="flex items-center">
-        <img src="../../assets/images/logo-white.png" alt="Rex Construct"
+      <a href="../index.html" class="flex items-center">
+        <img src="../assets/images/logo-white.png" alt="Rex Construct"
              class="h-16 sm:h-14 lg:h-28 object-contain transition-all duration-300">
       </a>
   
       <div class="flex items-center gap-10">
-        <a href="../contact.html"
+        <a href="contact.html"
           class="group hidden lg:inline-flex items-center gap-2 px-5 py-3 bg-white text-black rounded-md font-medium shadow transition-all duration-300 hover:bg-gray-100">
           <span class="transition-transform duration-300 group-hover:translate-x-1">Build Smart</span>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -72,169 +72,143 @@
   
       <!-- Menu Links -->
       <nav class="mt-6 flex flex-col gap-4 px-8 text-lg font-medium text-gray-800">
-        <a href="../../index.html" class="relative group">Home
+        <!-- Links biasa -->
+        <a href="index.html" class="relative group text-gray-800 transition-colors duration-300 hover:text-gray-900">
+          Home
           <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
         </a>
-        <a href="../about.html" class="relative group">About
+        <a href="pages/about.html" class="relative group text-gray-800 transition-colors duration-300 hover:text-gray-900">
+          About
           <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
         </a>
-        <a href="../why.html" class="relative group">Why Rex Construct
+        <a href="pages/why.html" class="relative group text-gray-800 transition-colors duration-300 hover:text-gray-900">
+          Why Rex Construct
           <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
         </a>
-        <a href="../projects-show.html" class="relative group">Projects
+        <a href="pages/projects-show.html" class="relative group text-gray-800 transition-colors duration-300 hover:text-gray-900">
+          Projects
           <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
         </a>
-        <a href="../contact.html" class="relative group">Contact
+        <a href="pages/contact.html" class="relative group text-gray-800 transition-colors duration-300 hover:text-gray-900">
+          Contact
           <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full"></span>
+        </a>
+
+        <!-- Tombol Build Smart untuk mobile -->
+        <a href="pages/contact2.html"
+          class="block lg:hidden mt-4 items-center gap-2 px-5 py-3 bg-black text-white rounded-md font-medium shadow transition-all duration-300 hover:bg-gray-800 text-center">
+          <span class="transition-transform duration-300">Build Smart</span>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 stroke-current inline-block ml-2 transition-transform duration-300">
+            <path d="M7 17L17 7M17 7H8M17 7V16"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </a>
       </nav>
     </aside>
 </section>  
 
-<!-- PROJECT DETAIL SECTION -->
-<section class="max-w-4xl mx-auto px-6 md:px-12 py-20 space-y-8">
-
-  <!-- Project Title -->
-  <div class="space-y-6">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 inline-block">
-      Projects 2
-      <span class="block h-1 bg-black mt-2 w-full"></span> <!-- garis se-lebar judul -->
-    </h1>
-
-    <!-- Project Info -->
-    <div class="space-y-3 text-gray-700 mt-4">
-      <div class="flex justify-between">
-        <span class="font-semibold">YEAR</span>
-        <span>2024</span>
+<!-- CONTACT SECTION -->
+<section class="relative w-full bg-white py-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 space-y-14">
+  
+      <!-- HEADING -->
+      <div class="text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+          Job Enquiries?<br>
+          <span class="text-gray-700 font-light">Get in Touch.</span>
+        </h2>
+        <!-- LINE ANIMATION -->
+        <div class="relative w-40 h-1 bg-gray-200 mx-auto mt-4 overflow-hidden rounded-full">
+          <span class="absolute inset-y-0 left-0 w-0 bg-black animate-line"></span>
+        </div>
       </div>
-      <div class="flex justify-between">
-        <span class="font-semibold">LOCATION</span>
-        <span>Echuca</span>
-      </div>
-      <div class="flex justify-between">
-        <span class="font-semibold">FACILITY SPACE</span>
-        <span>24,095 sqm</span>
-      </div>
-      <div class="flex justify-between">
-        <span class="font-semibold">CLIENT</span>
-        <span>Powercor</span>
-      </div>
-      <div class="flex justify-between">
-        <span class="font-semibold">ARCHITECT</span>
-        <span>JMA Architects</span>
-      </div>
-    </div>
-  </div>
+  
+      <!-- CONTENT -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+  
+        <!-- LEFT: IMAGE -->
+        <div class="w-full h-full">
+          <img src="../assets/images/banner-about.png" 
+               alt="Contact Rex Construct" 
+               class="w-full h-full object-cover rounded-lg shadow-lg">
+        </div>
+    
+        <!-- RIGHT: FORM + INFO -->
+        <div class="flex flex-col space-y-10">
+  
+            <!-- CONTACT FORM -->
+            <form action="#" method="POST" class="space-y-6 p-8 rounded-xl">
 
-</section>
+              <!-- First + Last Name -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="text" name="firstname" placeholder="First Name" required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:outline-none">
+                <input type="text" name="lastname" placeholder="Last Name" required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:outline-none">
+              </div>
 
-<!-- PROJECT GALLERY SECTION -->
-<section class="max-w-6xl mx-auto px-6 md:px-12 py-12">
-  <div class="overflow-x-auto md:overflow-hidden">
-    <div id="galleryTrack" class="flex md:flex-wrap gap-6">
-      <!-- Example Images -->
-      <img src="../../assets/images/1 test.jpg" alt="Project Image 1"
-           class="min-w-[80%] md:min-w-0 md:w-[48%] h-[20rem] object-cover rounded-lg">
-      <img src="../../assets/images/2 test.jpg" alt="Project Image 2"
-           class="min-w-[80%] md:min-w-0 md:w-[48%] h-[20rem] object-cover rounded-lg">
-      <img src="../../assets/images/3 test.jpg" alt="Project Image 3"
-           class="min-w-[80%] md:min-w-0 md:w-[48%] h-[20rem] object-cover rounded-lg">
-      <img src="../../assets/images/4 test.jpg" alt="Project Image 4"
-           class="min-w-[80%] md:min-w-0 md:w-[48%] h-[20rem] object-cover rounded-lg">
-      <img src="../../assets/images/banner-about.png" alt="Project Image 5"
-           class="min-w-[80%] md:min-w-0 md:w-[48%] h-[20rem] object-cover rounded-lg">
-      <img src="../../assets/images/banner-about2.png" alt="Project Image 6"
-           class="min-w-[80%] md:min-w-0 md:w-[48%] h-[20rem] object-cover rounded-lg">
-    </div>
-  </div>
-</section>
+              <!-- Email + Phone -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="email" name="email" placeholder="Email" required autocomplete="off"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:outline-none">
+                <input type="tel" name="phone" placeholder="Phone Number" required autocomplete="off"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:outline-none">
+              </div>
 
-<!-- OTHER PROJECTS SECTION -->
-<section id="projects" class="relative w-full py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-6 md:px-12">
-    <div class="flex justify-between items-center mb-8">
-      <h2 class="text-3xl md:text-5xl font-bold text-gray-900">View other</h2>
+              <!-- Company (optional) -->
+              <input type="text" name="company" placeholder="Company (Optional)"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:outline-none">
 
-      <div class="flex gap-3">
-        <!-- Prev -->
-        <button id="prevBtn"
-          class="p-3 bg-black rounded-full shadow hover:bg-gray-800 transition">
-          <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"
-               xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 12H18M6 12L11 7M6 12L11 17"
-                  stroke="#ffffff" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
+              <!-- Message -->
+              <textarea name="message" rows="5" placeholder="Your Message" required
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:outline-none"></textarea>
 
-        <!-- Next -->
-        <button id="nextBtn"
-          class="p-3 bg-black rounded-full shadow hover:bg-gray-800 transition">
-          <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"
-               xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 12H18M18 12L13 7M18 12L13 17"
-                  stroke="#ffffff" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="overflow-hidden">
-      <div id="carouselTrack" class="carousel-track flex gap-6">
+              <!-- Submit -->
+              <button type="submit"
+                      class="w-full px-6 py-3 bg-black text-white font-medium rounded-md shadow hover:bg-gray-900 transition">
+                Submit
+              </button>
+            </form>
         
-         <!-- contoh card -->
-         <div class="min-w-[90%] sm:min-w-[70%] md:min-w-[40%] relative group rounded-lg overflow-hidden shadow-lg">
-          <img src="../../assets/images/2 test.jpg"
-               class="w-full h-[32rem] md:h-[38rem] object-cover" alt="Project 1">
-          <div class="absolute bottom-0 left-0 w-full bg-black/50 p-4 text-white">
-            <h3 class="text-xl font-semibold">Projects 2</h3>
-            <a href="projects1.html" class="underline text-sm hover:text-gray-200">Learn More</a>
+          <!-- INFO -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-gray-200">
+            
+            <!-- ADDRESS -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Address</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Jl. Gatot Subroto No. 123<br>
+                Jakarta, Indonesia
+              </p>
+            </div>
+    
+            <!-- CONTACT -->
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Contact</h3>
+              <ul class="space-y-2 text-gray-600">
+                <li>📞 +62 812 3456 7890</li>
+                <li>📞 +62 811 2222 3333</li>
+                <li>✉️ info@rexconstruct.com</li>
+                <li>✉️ support@rexconstruct.com</li>
+              </ul>
+            </div>
           </div>
-        </div>
-
-         <!-- contoh card -->
-         <div class="min-w-[90%] sm:min-w-[70%] md:min-w-[40%] relative group rounded-lg overflow-hidden shadow-lg">
-          <img src="../../assets/images/3 test.jpg"
-               class="w-full h-[32rem] md:h-[38rem] object-cover" alt="Project 1">
-          <div class="absolute bottom-0 left-0 w-full bg-black/50 p-4 text-white">
-            <h3 class="text-xl font-semibold">Projects 3</h3>
-            <a href="projects2.html" class="underline text-sm hover:text-gray-200">Learn More</a>
-          </div>
-        </div>
-
-         <!-- contoh card -->
-         <div class="min-w-[90%] sm:min-w-[70%] md:min-w-[40%] relative group rounded-lg overflow-hidden shadow-lg">
-          <img src="../../assets/images/4 test.jpg"
-               class="w-full h-[32rem] md:h-[38rem] object-cover" alt="Project 1">
-          <div class="absolute bottom-0 left-0 w-full bg-black/50 p-4 text-white">
-            <h3 class="text-xl font-semibold">Projects 4</h3>
-            <a href="projects3.html" class="underline text-sm hover:text-gray-200">Learn More</a>
-          </div>
-        </div>
-
-         <!-- contoh card -->
-         <div class="min-w-[90%] sm:min-w-[70%] md:min-w-[40%] relative group rounded-lg overflow-hidden shadow-lg">
-          <img src="../../assets/images/dummy2.png"
-               class="w-full h-[32rem] md:h-[38rem] object-cover" alt="Project 1">
-          <div class="absolute bottom-0 left-0 w-full bg-black/50 p-4 text-white">
-            <h3 class="text-xl font-semibold">Projects 5</h3>
-            <a href="projects6.html" class="underline text-sm hover:text-gray-200">Learn More</a>
-          </div>
-        </div>
-
-         <!-- contoh card -->
-         <div class="min-w-[90%] sm:min-w-[70%] md:min-w-[40%] relative group rounded-lg overflow-hidden shadow-lg">
-          <img src="../../assets/images/dummy1.png"
-               class="w-full h-[32rem] md:h-[38rem] object-cover" alt="Project 1">
-          <div class="absolute bottom-0 left-0 w-full bg-black/50 p-4 text-white">
-            <h3 class="text-xl font-semibold">Projects 6</h3>
-            <a href="projects5.html" class="underline text-sm hover:text-gray-200">Learn More</a>
-          </div>
+    
         </div>
       </div>
     </div>
-  </div>
+</section>
+  
+<!-- GOOGLE MAPS SECTION -->
+<section class="relative w-full h-[400px] md:h-[500px] mb-12">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5669391052097!2d106.82715311531092!3d-6.200000295498428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e5a7e5d8d5%3A0x123456789abcdef!2sJakarta!5e0!3m2!1sen!2sid!4v1690000000000!5m2!1sen!2sid" 
+      width="100%" height="100%" 
+      style="border:0;" allowfullscreen="" loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade"
+      class="rounded-none">
+    </iframe>
 </section>
 
 <!-- FOOTER -->
@@ -299,14 +273,14 @@
     <div class="mt-16 flex flex-col md:flex-row justify-between items-start md:items-end">
       
       <!-- Logo (kiri bawah, sejajar copyright) -->
-      <img src="../../assets/images/logo-white.png"
+      <img src="../assets/images/logo-white.png"
            alt="Rex Construct"
            class="w-36 mb-6 md:mb-0">
 
       <!-- Right side: Build Smart + Copyright -->
       <div class="flex flex-col items-start md:items-end space-y-4">
         <!-- Build Smart -->
-        <a href="contact.html"
+        <a href="#contact"
            class="group relative inline-flex items-center gap-2 text-2xl md:text-3xl font-bold text-white transition">
           Build Smart
           <svg viewBox="0 0 24 24" fill="none"
@@ -332,8 +306,7 @@
 </main>
 
 <!-- js for default functions -->
-<script src="../../js/script.js"></script>
-<script src="../../js/projects.js"></script>
+<script src="../js/script.js"></script>
 
 </body>
 </html>
