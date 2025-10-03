@@ -1,37 +1,117 @@
-// scroll track
+// Gallery Showcase
 (function(){
 const gallery = document.getElementById('galleryTrack');
-let isDown = false;
-let startX, scrollLeft;
+if (!gallery) return;
+
+const original = Array.from(gallery.children).map(el => el.outerHTML);
+const N = original.length;
+if (!N) return;
+
+let cardW = 0, gap = 0, step = 0;
+function computeSizes() {
+    cardW = gallery.children[0].getBoundingClientRect().width;
+    gap   = parseFloat(getComputedStyle(gallery).gap || '16');
+    step  = cardW + gap;
+}
+
+function setCenter() {
+    computeSizes();
+    gallery.scrollLeft = N * step; // batch tengah
+}
+
+function checkLoop() {
+    if (gallery.scrollLeft < N * step * 0.5) {
+    gallery.scrollLeft += N * step;
+    } else if (gallery.scrollLeft > N * step * 2.5) {
+    gallery.scrollLeft -= N * step;
+    }
+}
+
+function smoothScrollTo(target) {
+    gallery.style.scrollBehavior = 'smooth';
+    gallery.scrollTo({ left: target, behavior: 'smooth' });
+    // reset setelah animasi biar drag normal
+    setTimeout(()=> gallery.style.scrollBehavior = 'auto', 400);
+}
+
+// drag & touch vars
+let isDown = false, startX, scrollLeft, hasDragged = false;
 
 gallery.addEventListener('mousedown', e => {
     isDown = true;
+    hasDragged = false;
     startX = e.pageX - gallery.offsetLeft;
     scrollLeft = gallery.scrollLeft;
 });
 gallery.addEventListener('mouseleave', () => isDown = false);
-gallery.addEventListener('mouseup', () => isDown = false);
+gallery.addEventListener('mouseup', () => {
+    if (!isDown) return;
+    isDown = false;
+    snapToNearest();
+});
 gallery.addEventListener('mousemove', e => {
     if(!isDown) return;
     e.preventDefault();
+    hasDragged = true;
     const x = e.pageX - gallery.offsetLeft;
-    const walk = (x - startX) * 2; // scroll-fast
+    const walk = (x - startX);
     gallery.scrollLeft = scrollLeft - walk;
+    checkLoop();
 });
 
 // Touch
-let startTouchX = 0;
-let touchScrollLeft = 0;
+let startTouchX = 0, touchScrollLeft = 0;
 gallery.addEventListener('touchstart', e => {
     startTouchX = e.touches[0].pageX;
     touchScrollLeft = gallery.scrollLeft;
-});
+}, { passive: true });
 gallery.addEventListener('touchmove', e => {
     const x = e.touches[0].pageX;
-    const walk = (x - startTouchX) * 2;
+    const walk = (x - startTouchX);
     gallery.scrollLeft = touchScrollLeft - walk;
+    checkLoop();
+}, { passive: true });
+gallery.addEventListener('touchend', () => {
+    snapToNearest();
 });
-})();
+
+// snap ke kartu terdekat
+function snapToNearest() {
+    computeSizes();
+    let i = Math.round(gallery.scrollLeft / step);
+    smoothScrollTo(i * step);
+}
+
+function initLooping() {
+    // reset isi
+    gallery.innerHTML = '';
+    // triple batch
+    for (let b = 0; b < 3; b++) {
+    original.forEach(html => {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html.trim();
+        gallery.appendChild(tmp.firstChild);
+    });
+    }
+    setCenter();
+}
+
+function destroyLooping() {
+    gallery.innerHTML = original.join('');
+}
+
+function updateMode() {
+    if (window.innerWidth < 768) {
+    initLooping();
+    } else {
+    destroyLooping();
+    }
+}
+
+window.addEventListener('resize', updateMode);
+updateMode();
+
+})();           
 
 // Projects Showcase
 (function(){
@@ -162,4 +242,46 @@ wrapper.addEventListener('wheel', (e) => {
     }
 }, { passive: false });
 
-})();  
+// mobile
+let touchStartX = 0;
+let touchEndX = 0;
+let touchCooldown = false;
+
+wrapper.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1) return;
+    touchStartX = e.touches[0].pageX;
+    touchEndX = touchStartX;
+}, { passive: true });
+
+wrapper.addEventListener('touchmove', (e) => {
+    if (e.touches.length !== 1) return;
+    touchEndX = e.touches[0].pageX;
+}, { passive: true });
+
+wrapper.addEventListener('touchend', () => {
+    if (isAnimating || touchCooldown) return;
+
+    const deltaX = touchEndX - touchStartX;
+
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+        if (deltaX < 0) {
+            index++; // geser ke kanan
+        } else {
+            index--; // geser ke kiri
+        }
+        setAnimated(index);
+
+        // Lock gesture
+        touchCooldown = true;
+
+        setTimeout(() => {
+            touchCooldown = false;
+        }, duration + 150);
+    }
+
+    // reset supaya gesture berikutnya fresh
+    touchStartX = 0;
+    touchEndX = 0;
+});
+
+})();

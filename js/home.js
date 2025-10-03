@@ -136,40 +136,44 @@ wrapper.addEventListener('wheel', (e) => {
 
 // mobile
 let touchStartX = 0;
-let touchBuffer = 0;
+let touchEndX = 0;
 let touchCooldown = false;
 
 wrapper.addEventListener('touchstart', (e) => {
     if (e.touches.length !== 1) return;
     touchStartX = e.touches[0].pageX;
-    touchBuffer = 0;
+    touchEndX = touchStartX;
 }, { passive: true });
 
 wrapper.addEventListener('touchmove', (e) => {
-    if (isAnimating || touchCooldown || e.touches.length !== 1) return;
-    let deltaX = e.touches[0].pageX - touchStartX;
-    touchBuffer += deltaX;
-    touchStartX = e.touches[0].pageX;
+    if (e.touches.length !== 1) return;
+    touchEndX = e.touches[0].pageX;
 }, { passive: true });
 
-wrapper.addEventListener('touchend', (e) => {
+wrapper.addEventListener('touchend', () => {
     if (isAnimating || touchCooldown) return;
 
-    if (Math.abs(touchBuffer) > SWIPE_THRESHOLD) {
-        if (touchBuffer < 0) {
-            index++;
+    const deltaX = touchEndX - touchStartX;
+
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
+        if (deltaX < 0) {
+            index++; // geser ke kanan
         } else {
-            index--;
+            index--; // geser ke kiri
         }
         setAnimated(index);
 
+        // Lock gesture
         touchCooldown = true;
-        touchBuffer = 0;
 
         setTimeout(() => {
             touchCooldown = false;
         }, duration + 150);
     }
+
+    // reset supaya gesture berikutnya fresh
+    touchStartX = 0;
+    touchEndX = 0;
 });
 
 })();             
