@@ -1,20 +1,61 @@
 (function() {
-// Inisialisasi EmailJS
-emailjs.init("Jf33d7klVKhYm6uBE");
+emailjs.init("Jf33d7klVKhYm6uBE"); // public key
 
 const form = document.getElementById("jobEnquiryForm");
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
-    // Kirim ke client saja
+    // Ambil semua input
+    const firstname = form.firstname.value.trim();
+    const lastname  = form.lastname.value.trim();
+    const email     = form.email.value.trim();
+    const phone     = form.phone.value.trim();
+    const company   = form.company.value.trim();
+    const message   = form.message.value.trim();
+
+    // Validasi sederhana
+    if (!firstname || !lastname || !email || !phone || !message) {
+    Swal.fire({
+        icon: "warning",
+        title: "Incomplete Data",
+        text: "Please fill in all required fields before submitting.",
+        confirmButtonColor: "#000"
+    });
+    return;
+    }
+
+    // Validasi format email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+    Swal.fire({
+        icon: "warning",
+        title: "Invalid Email",
+        text: "Please enter a valid email address.",
+        confirmButtonColor: "#000"
+    });
+    return;
+    }
+
+    // Validasi phone minimal 8 digit (optional)
+    const phonePattern = /^[0-9+\-\s]{8,20}$/;
+    if (!phonePattern.test(phone)) {
+    Swal.fire({
+        icon: "warning",
+        title: "Invalid Phone Number",
+        text: "Please enter a valid phone number.",
+        confirmButtonColor: "#000"
+    });
+    return;
+    }
+
+    // Semua valid → kirim ke client
     emailjs.sendForm(
-    "service_nxj9nf6",      // Service ID
-    "template_01u6l8v",     // Template untuk client ID
-    this,
-    "Jf33d7klVKhYm6uBE"     // Public Key
+    "service_nxj9nf6",   // service ID
+    "template_01u6l8v",  // template client
+    form,
+    "Jf33d7klVKhYm6uBE"  // public key
     ).then(() => {
-    // Notifikasi sukses ke user
     Swal.fire({
         icon: "success",
         title: "Thank you",
@@ -23,7 +64,6 @@ form.addEventListener("submit", function(e) {
     });
     form.reset();
     }, (err) => {
-    // Notifikasi error
     Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -33,5 +73,4 @@ form.addEventListener("submit", function(e) {
     console.error("EmailJS error:", err);
     });
 });
-})();
-  
+})();  
