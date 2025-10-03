@@ -5,9 +5,11 @@ lenis.on('scroll', ({ scroll }) => {
   track.style.transform = `translateX(${-scroll * 0.3 % track.scrollWidth}px)`;
 });
 
-// Projects Showcase
+// Projects Showcase (Optimized)
 (function(){
 const carousel = document.getElementById('carouselTrack');
+if (!carousel) return;
+
 const wrapper  = carousel.parentElement;
 const nextBtn  = document.getElementById('nextBtn');
 const prevBtn  = document.getElementById('prevBtn');
@@ -16,7 +18,7 @@ const originalHTML = Array.from(carousel.children).map(el => el.outerHTML);
 const N = originalHTML.length;
 if (!N) return;
 
-// triple batch [A][A][A] untuk infinite scroll
+// Triple batch [A][A][A] untuk infinite scroll
 carousel.innerHTML = '';
 for (let b = 0; b < 3; b++) {
     originalHTML.forEach(html => {
@@ -26,17 +28,19 @@ for (let b = 0; b < 3; b++) {
     });
 }
 
+// Utility untuk menunggu gambar load
 function imagesLoaded(parent){
     const imgs = parent.querySelectorAll('img');
     return Promise.all(
-    Array.from(imgs).map(img => img.complete
-        ? Promise.resolve()
-        : new Promise(res => { img.onload = res; img.onerror = res; })));
+        Array.from(imgs).map(img => img.complete
+            ? Promise.resolve()
+            : new Promise(res => { img.onload = res; img.onerror = res; }))
+    );
 }
 
 let gap = 24, cardW = 0, step = 0;
-const duration = 800;                   // lebih smooth & berat
-const easing  = 'ease-in-out';          
+const duration = 800;
+const easing = 'ease-in-out';
 let index = N;
 let isAnimating = false;
 
@@ -61,49 +65,32 @@ carousel.addEventListener('transitionend', () => {
     if (index >= 2 * N) {
         index -= N;
         setInstant(index);
-        void carousel.offsetWidth;
     } else if (index < N) {
         index += N;
         setInstant(index);
-        void carousel.offsetWidth;
     }
-    setTimeout(() => { isAnimating = false; }, 20);
+    setTimeout(()=> { isAnimating = false; }, 20);
 });
 
 imagesLoaded(carousel).then(() => {
     computeSizes();
     index = N;
     setInstant(index);
-    setTimeout(()=> {
-        carousel.style.transition = `transform ${duration}ms ${easing}`;
-    }, 30);
+    setTimeout(()=> carousel.style.transition = `transform ${duration}ms ${easing}`, 30);
 });
 
-nextBtn.addEventListener('click', () => {
-    if (isAnimating) return;
-    index++;
-    setAnimated(index);
-});
-prevBtn.addEventListener('click', () => {
-    if (isAnimating) return;
-    index--;
-    setAnimated(index);
-});
+// Button
+nextBtn?.addEventListener('click', () => { if (!isAnimating) setAnimated(++index); });
+prevBtn?.addEventListener('click', () => { if (!isAnimating) setAnimated(--index); });
 
-let resizeTimer;
+// Resize
 window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        computeSizes();
-        setInstant(index);
-        setTimeout(()=> {
-            carousel.style.transition = `transform ${duration}ms ${easing}`;
-        }, 20);
-    }, 120);
+    computeSizes();
+    setInstant(index);
 });
 
-// Touchpad swipe support stabil → 1 gesture = 1 slide
-const SWIPE_THRESHOLD = 40;   // sensitivitas geser
+// Touchpad / Wheel
+const SWIPE_THRESHOLD = 40;
 let wheelBuffer = 0;
 let wheelCooldown = false;
 
@@ -115,26 +102,16 @@ wrapper.addEventListener('wheel', (e) => {
         wheelBuffer += e.deltaX;
 
         if (Math.abs(wheelBuffer) > SWIPE_THRESHOLD) {
-            if (wheelBuffer > 0) {
-                index++;
-            } else {
-                index--;
-            }
+            index += (wheelBuffer > 0) ? 1 : -1;
             setAnimated(index);
-
-            // Lock gesture → cegah double trigger
-            wheelCooldown = true;
             wheelBuffer = 0;
-
-            // Cooldown sesuai durasi animasi + buffer
-            setTimeout(() => {
-                wheelCooldown = false;
-            }, duration + 150); 
+            wheelCooldown = true;
+            setTimeout(()=> wheelCooldown = false, duration + 150);
         }
     }
 }, { passive: false });
 
-// mobile
+// Touch support
 let touchStartX = 0;
 let touchEndX = 0;
 let touchCooldown = false;
@@ -154,29 +131,20 @@ wrapper.addEventListener('touchend', () => {
     if (isAnimating || touchCooldown) return;
 
     const deltaX = touchEndX - touchStartX;
-
     if (Math.abs(deltaX) > SWIPE_THRESHOLD) {
-        if (deltaX < 0) {
-            index++; // geser ke kanan
-        } else {
-            index--; // geser ke kiri
-        }
+        index += (deltaX < 0) ? 1 : -1;
         setAnimated(index);
 
-        // Lock gesture
         touchCooldown = true;
-
-        setTimeout(() => {
-            touchCooldown = false;
-        }, duration + 150);
+        setTimeout(()=> touchCooldown = false, duration + 150);
     }
 
-    // reset supaya gesture berikutnya fresh
+    // reset
     touchStartX = 0;
     touchEndX = 0;
 });
 
-})();             
+})();            
 
 // Fade-in teks "Why Rex Construct" saat muncul di viewport
 const whyText = document.getElementById('why-text');
